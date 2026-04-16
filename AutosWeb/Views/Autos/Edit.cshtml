@@ -1,0 +1,15 @@
+@model AutosWeb.Models.AutoViewModel
+@{
+    ViewData["Title"] = $"Editar — {Model.Marca} {Model.Modelo}";
+}
+
+<h1 class="title is-3">Editar auto</h1>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" novalidate>
+    @Html.AntiForgeryToken()
+    <partial name="_Form" model="Model" />
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

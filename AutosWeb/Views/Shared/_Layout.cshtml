@@ -1,0 +1,64 @@
+﻿@{
+    var title = ViewData["Title"] as string ?? "Autos";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@title — AutosWeb</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <nav class="navbar is-primary" role="navigation" aria-label="menú principal">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item has-text-weight-bold" asp-controller="Autos" asp-action="Index">
+                    AutosWeb
+                </a>
+            </div>
+            <div class="navbar-menu is-active">
+                <div class="navbar-start">
+                    <a class="navbar-item" asp-controller="Autos" asp-action="Index">Autos</a>
+                    <a class="navbar-item" asp-controller="Autos" asp-action="Create">Nuevo</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            @if (TempData["Success"] is string okMsg)
+            {
+                <div class="notification is-success is-light" role="status">
+                    <button class="delete" aria-label="cerrar"></button>
+                    @okMsg
+                </div>
+            }
+            @if (TempData["Error"] is string errMsg)
+            {
+                <div class="notification is-danger is-light" role="alert">
+                    <button class="delete" aria-label="cerrar"></button>
+                    @errMsg
+                </div>
+            }
+
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p><strong>AutosWeb</strong> — Caso de uso INNOVA &copy; @DateTime.Now.Year</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,77 @@
+@model IEnumerable<AutosWeb.Models.AutoViewModel>
+@{
+    ViewData["Title"] = "Listado de autos";
+}
+
+<div class="level">
+    <div class="level-left">
+        <div class="level-item">
+            <h1 class="title is-3">Autos</h1>
+        </div>
+    </div>
+    <div class="level-right">
+        <div class="level-item">
+            <a class="button is-primary" asp-action="Create">
+                <span>+ Nuevo auto</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="notification is-info is-light">
+        No hay autos registrados todavía. Hacé clic en <strong>Nuevo auto</strong> para crear el primero.
+    </div>
+}
+else
+{
+    <div class="table-container">
+        <table class="table is-fullwidth is-striped is-hoverable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Año</th>
+                    <th>Tipo</th>
+                    <th>Asientos</th>
+                    <th>Color</th>
+                    <th class="has-text-right">Precio</th>
+                    <th>Estado</th>
+                    <th class="has-text-centered">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var auto in Model)
+            {
+                <tr>
+                    <td>@auto.Id</td>
+                    <td>@auto.Marca</td>
+                    <td>@auto.Modelo</td>
+                    <td>@auto.Anio</td>
+                    <td>@auto.TipoAuto</td>
+                    <td>@auto.CantidadAsientos</td>
+                    <td>@auto.Color</td>
+                    <td class="has-text-right">@auto.Precio.ToString("N2")</td>
+                    <td>
+                        @if (auto.Activo)
+                        {
+                            <span class="tag is-success">Activo</span>
+                        }
+                        else
+                        {
+                            <span class="tag is-light">Inactivo</span>
+                        }
+                    </td>
+                    <td class="table-actions has-text-centered">
+                        <a class="button is-small is-info is-light" asp-action="Details" asp-route-id="@auto.Id" aria-label="Ver detalles">Ver</a>
+                        <a class="button is-small is-warning is-light" asp-action="Edit" asp-route-id="@auto.Id" aria-label="Editar">Editar</a>
+                        <a class="button is-small is-danger is-light" asp-action="Delete" asp-route-id="@auto.Id" aria-label="Eliminar">Eliminar</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}

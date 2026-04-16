@@ -1,0 +1,35 @@
+@model AutosWeb.Models.AutoViewModel
+@{
+    ViewData["Title"] = "Eliminar auto";
+}
+
+<h1 class="title is-3">Eliminar auto</h1>
+
+<div class="notification is-warning is-light">
+    ¿Está seguro que desea eliminar el siguiente auto? Esta acción no se puede deshacer.
+</div>
+
+<div class="card">
+    <div class="card-content">
+        <div class="columns is-multiline">
+            <div class="column is-half"><strong>Marca:</strong> @Model.Marca</div>
+            <div class="column is-half"><strong>Modelo:</strong> @Model.Modelo</div>
+            <div class="column is-half"><strong>Año:</strong> @Model.Anio</div>
+            <div class="column is-half"><strong>Tipo:</strong> @Model.TipoAuto</div>
+            <div class="column is-half"><strong>Color:</strong> @Model.Color</div>
+            <div class="column is-half"><strong>Precio:</strong> @Model.Precio.ToString("N2")</div>
+        </div>
+    </div>
+</div>
+
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post" data-confirm="¿Confirma que desea eliminar este auto?" class="mt-4">
+    @Html.AntiForgeryToken()
+    <div class="field is-grouped">
+        <div class="control">
+            <button type="submit" class="button is-danger">Eliminar</button>
+        </div>
+        <div class="control">
+            <a class="button is-light" asp-action="Index">Cancelar</a>
+        </div>
+    </div>
+</form>

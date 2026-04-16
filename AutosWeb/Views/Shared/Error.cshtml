@@ -1,0 +1,16 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="title is-3 has-text-danger">Ocurrió un error</h1>
+<p class="subtitle is-5">Se produjo un problema al procesar su solicitud.</p>
+
+@if (Model.ShowRequestId)
+{
+    <p><strong>Request ID:</strong> <code>@Model.RequestId</code></p>
+}
+
+<p>
+    <a class="button is-light" asp-controller="Autos" asp-action="Index">Volver al listado</a>
+</p>

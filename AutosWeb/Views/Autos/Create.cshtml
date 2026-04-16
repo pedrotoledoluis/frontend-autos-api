@@ -1,0 +1,15 @@
+@model AutosWeb.Models.AutoViewModel
+@{
+    ViewData["Title"] = "Nuevo auto";
+}
+
+<h1 class="title is-3">Nuevo auto</h1>
+
+<form asp-action="Create" method="post" novalidate>
+    @Html.AntiForgeryToken()
+    <partial name="_Form" model="Model" />
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,38 @@
+@model AutosWeb.Models.AutoViewModel
+@{
+    ViewData["Title"] = $"Detalles — {Model.Marca} {Model.Modelo}";
+}
+
+<h1 class="title is-3">Detalles del auto</h1>
+
+<div class="card">
+    <div class="card-content">
+        <div class="columns is-multiline">
+            <div class="column is-half"><strong>Id:</strong> @Model.Id</div>
+            <div class="column is-half"><strong>Marca:</strong> @Model.Marca</div>
+            <div class="column is-half"><strong>Modelo:</strong> @Model.Modelo</div>
+            <div class="column is-half"><strong>Año:</strong> @Model.Anio</div>
+            <div class="column is-half"><strong>Tipo:</strong> @Model.TipoAuto</div>
+            <div class="column is-half"><strong>Asientos:</strong> @Model.CantidadAsientos</div>
+            <div class="column is-half"><strong>Color:</strong> @Model.Color</div>
+            <div class="column is-half"><strong>Precio:</strong> @Model.Precio.ToString("N2")</div>
+            <div class="column is-half">
+                <strong>Estado:</strong>
+                @if (Model.Activo)
+                {
+                    <span class="tag is-success">Activo</span>
+                }
+                else
+                {
+                    <span class="tag is-light">Inactivo</span>
+                }
+            </div>
+            <div class="column is-half"><strong>Creado:</strong> @Model.FechaCreacion.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</div>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <a class="card-footer-item" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+        <a class="card-footer-item" asp-action="Delete" asp-route-id="@Model.Id">Eliminar</a>
+        <a class="card-footer-item" asp-action="Index">Volver</a>
+    </footer>
+</div>

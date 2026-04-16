@@ -1,0 +1,8 @@
+html { scroll-behavior: smooth; }
+
+.table-actions { white-space: nowrap; }
+.table-actions .button { margin-right: .25rem; }
+
+.field .help.is-danger { font-weight: 500; }
+
+.navbar-menu.is-active { display: flex; }
