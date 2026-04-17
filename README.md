@@ -1,11 +1,11 @@
 # AutosWeb — Frontend (.NET 10 + Bulma)
 
-Aplicación web **ASP.NET Core MVC** (.NET 10) que consume la API REST `AutosApi` y presenta el CRUD de autos con una UI basada en **Bulma CSS** y **jQuery**. Forma parte del caso de uso técnico para INNOVA.
+Aplicación web **ASP.NET Core MVC** (.NET 10) que consume la API REST `AutosApi` y presenta el CRUD de autos con una UI basada en **Bulma CSS** y **jQuery**.
 
 ## Stack
 
 - .NET 10 — ASP.NET Core MVC
-- [Bulma CSS 1.x](https://bulma.io) vía CDN (**sin Bootstrap**)
+- [Bulma CSS 1.x](https://bulma.io) vía CDN 
 - jQuery 3.7 vía CDN
 - `HttpClient` tipado (`IAutosApiClient`) con `AddHttpClient<T>`
 - Configuración de `ApiSettings:BaseUrl` por ambiente
@@ -41,12 +41,6 @@ La URL base de la API es configurable:
 | `appsettings.Development.json`   | Override en desarrollo          |
 | Variable de entorno `ApiSettings__BaseUrl` | Override en cualquier ambiente |
 
-Ejemplo (PowerShell) para apuntar a otra URL:
-
-```powershell
-$env:ApiSettings__BaseUrl = "https://mi-api.com"
-dotnet run
-```
 
 ## Cómo el frontend consume la API
 
@@ -62,7 +56,7 @@ El consumo está **desacoplado** en la interfaz `IAutosApiClient` (`Services/IAu
 | `Edit (POST)`    | PUT        | `/api/autos/{id}`         |
 | `Delete (POST)`  | DELETE     | `/api/autos/{id}`         |
 
-Contrato JSON de entrada/salida (camelCase):
+Contrato JSON de entrada/salida:
 
 ```json
 {
@@ -89,32 +83,3 @@ Contrato JSON de entrada/salida (camelCase):
 - Accesibilidad básica: `lang="es"`, `aria-label`, etiquetas asociadas a inputs.
 - jQuery mínimo (cierre de notificaciones + confirmación de borrado).
 
-## Estructura del proyecto
-
-```
-frontend-autos-web/
-└── AutosWeb/
-    ├── Controllers/AutosController.cs
-    ├── Models/
-    │   ├── AutoViewModel.cs
-    │   └── ErrorViewModel.cs
-    ├── Services/
-    │   ├── IAutosApiClient.cs
-    │   └── AutosApiClient.cs
-    ├── Views/
-    │   ├── Autos/{Index,Details,Create,Edit,Delete,_Form}.cshtml
-    │   └── Shared/{_Layout,Error,_ValidationScriptsPartial}.cshtml
-    ├── wwwroot/
-    │   ├── css/site.css
-    │   └── js/site.js
-    ├── Program.cs
-    ├── appsettings.json
-    └── appsettings.Development.json
-```
-
-## Entregables
-
-- [x] Código fuente del frontend .NET Core (MVC)
-- [x] README con pasos de ejecución y endpoints consumidos
-- [x] UI con Bulma (sin Bootstrap) + jQuery
-- [x] URL de API configurable por ambiente

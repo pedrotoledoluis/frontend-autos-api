@@ -1,5 +1,9 @@
 html { scroll-behavior: smooth; }
 
+html, body { min-height: 100vh; }
+
+body.is-flex { min-height: 100vh; }
+
 .table-actions { white-space: nowrap; }
 .table-actions .button { margin-right: .25rem; }
 
