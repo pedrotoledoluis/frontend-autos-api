@@ -1,4 +1,5 @@
 @model AutosWeb.Models.AutoViewModel
+@using AutosWeb.Models
 
 <div asp-validation-summary="ModelOnly" class="notification is-danger is-light" role="alert"></div>
 
@@ -35,14 +36,10 @@
             <div class="select is-fullwidth">
                 <select asp-for="TipoAuto" required>
                     <option value="">-- Seleccionar --</option>
-                    <option>Sedan</option>
-                    <option>Hatchback</option>
-                    <option>SUV</option>
-                    <option>Pickup</option>
-                    <option>Coupe</option>
-                    <option>Convertible</option>
-                    <option>Monovolumen</option>
-                    <option>Deportivo</option>
+                    @foreach (var tipo in TiposAuto.Opciones)
+                    {
+                        <option value="@tipo">@tipo</option>
+                    }
                 </select>
             </div>
         </div>

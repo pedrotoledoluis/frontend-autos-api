@@ -7,7 +7,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@title — AutosWeb</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+          integrity="sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body class="is-flex is-flex-direction-column">
@@ -17,7 +21,7 @@
                 <h1 class="navbar-item has-text-weight-bold title is-3" asp-controller="Autos" asp-action="Index">
                     CRUD de Autos
                 </h1>
-            </div>            
+            </div>
         </div>
     </nav>
 
@@ -25,15 +29,15 @@
         <div class="container">
             @if (TempData["Success"] is string okMsg)
             {
-                <div class="notification is-success is-light" role="status">
-                    <button class="delete" aria-label="cerrar"></button>
+                <div class="notification is-success is-light" role="status" data-dismissible>
+                    <button class="delete" type="button" aria-label="cerrar"></button>
                     @okMsg
                 </div>
             }
             @if (TempData["Error"] is string errMsg)
             {
-                <div class="notification is-danger is-light" role="alert">
-                    <button class="delete" aria-label="cerrar"></button>
+                <div class="notification is-danger is-light" role="alert" data-dismissible>
+                    <button class="delete" type="button" aria-label="cerrar"></button>
                     @errMsg
                 </div>
             }
@@ -50,9 +54,28 @@
         </div>
     </footer>
 
+    <div id="confirm-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title" aria-hidden="true">
+        <div class="modal-background" data-modal-close></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p id="confirm-modal-title" class="modal-card-title">Confirmar acción</p>
+                <button class="delete" type="button" aria-label="cerrar" data-modal-close></button>
+            </header>
+            <section class="modal-card-body">
+                <p id="confirm-modal-message">¿Está seguro?</p>
+            </section>
+            <footer class="modal-card-foot is-justify-content-flex-end">
+                <button type="button" class="button" data-modal-close>Cancelar</button>
+                <button type="button" class="button is-danger" data-modal-accept>Confirmar</button>
+            </footer>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+    <script type="module" src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

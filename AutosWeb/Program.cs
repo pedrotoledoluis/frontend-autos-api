@@ -1,4 +1,7 @@
+using AutosWeb.Infrastructure.Security;
 using AutosWeb.Services;
+using Microsoft.AspNetCore.CookiePolicy;
+using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,22 @@ builder.Services.AddHttpClient<IAutosApiClient, AutosApiClient>(client =>
     client.Timeout = TimeSpan.FromSeconds(30);
 });
 
+builder.Services.AddAntiforgery(options =>
+{
+    options.Cookie.Name = "__Host-AutosWeb.Antiforgery";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.SameSite = SameSiteMode.Strict;
+    options.HeaderName = "X-XSRF-TOKEN";
+});
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.Strict;
+    options.HttpOnly = HttpOnlyPolicy.Always;
+    options.Secure = CookieSecurePolicy.Always;
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -22,7 +41,9 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseSecurityHeaders();
 app.UseStaticFiles();
+app.UseCookiePolicy();
 app.UseRouting();
 app.UseAuthorization();
 
